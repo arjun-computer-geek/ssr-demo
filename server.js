@@ -6,31 +6,37 @@ import * as ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from "react-router-dom/server";
 import App from './src/App'
 import bodyParser from 'body-parser';
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(express.static('build/public'));
+const getData = async () => {
+    const res = await fetch('https://dummyjson.com/products/1')
+    let jsonData = res.json();
+    return jsonData;
 
-app.get('*', (req, res) => {
+}
+let data = { title: "Default title" }
 
+app.get('*', async (req, res) => {
+    data = await getData();
     const content = ReactDOMServer.renderToString(
         <StaticRouter location={req.url}>
             <App />
         </StaticRouter>
     )
 
-    const helmet = Helmet.renderStatic();
+    // const helmet = Helmet.renderStatic();
     const html = `
     <!DOCTYPE html>
-    <html>
+    <html >
     <head>
+    <title>${data.title}</title>
         <meta name="title" content="Default Title" data-react-helmet="true">
-        ${helmet.meta.toString()}
-        ${helmet.title.toString()}
         </head>
-        <body>
+        <body >
             <div id="root">
             ${content}
             </div>
