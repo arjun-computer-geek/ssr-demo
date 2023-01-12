@@ -6,7 +6,7 @@ import * as ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from "react-router-dom/server";
 import App from './src/App'
 import bodyParser from 'body-parser';
-// import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -27,13 +27,15 @@ app.get('*', async (req, res) => {
             <App />
         </StaticRouter>
     )
+    const helmet = Helmet.renderStatic("arju2");
 
-    // const helmet = Helmet.renderStatic();
+    // console.log(helmet.title.toString(), "title");
+    console.log(data.title, "data")
     const html = `
     <!DOCTYPE html>
-    <html >
+    <html>
     <head>
-    <title>${data.title}</title>
+        <title data-react-helmet="true">Arjun</title>
         <meta name="title" content="Default Title" data-react-helmet="true">
         </head>
         <body >
