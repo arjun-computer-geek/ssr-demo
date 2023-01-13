@@ -27,15 +27,13 @@ app.get('*', async (req, res) => {
             <App />
         </StaticRouter>
     )
-    const helmet = Helmet.renderStatic("arju2");
-
-    // console.log(helmet.title.toString(), "title");
-    console.log(data.title, "data")
+    const helmet = Helmet.renderStatic();
+    
     const html = `
     <!DOCTYPE html>
     <html>
     <head>
-        <title data-react-helmet="true">Arjun</title>
+        ${helmet.title.toString()}
         <meta name="title" content="Default Title" data-react-helmet="true">
         </head>
         <body >

@@ -14,12 +14,14 @@ const [data, setData] = useState({});
         
     }, [])
 
-    // useEffect(()=> {
-    //     if(data !== undefined){
-    //         document.title=`${data.title}`
-    //     }
-    // },[data])
-
+    useEffect(()=> {
+        if(data !== undefined){
+            setTitle
+        }
+    },[data])
+const setTitle = () => {
+    document.getElementsByTagName('head')[0].getElementsByTagName('title')[0].innerHTML = data.title
+}
     const clickHandler = () => {
         console.log("abc")
     }

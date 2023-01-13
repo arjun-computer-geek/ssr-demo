@@ -7,6 +7,7 @@
     "webpack:client": "webpack --config webpack.client.js --watch",
     "webpack:server": "webpack --config webpack.server.js --watch",
     "webpack:start": "nodemon --watch build --exec node build/bundle.js",
+    "build": "webpack --config webpack.server.js && webpack --config webpack.client.js",
     "dev": "npm-run-all --parallel webpack:*"
   },
   "dependencies": {
